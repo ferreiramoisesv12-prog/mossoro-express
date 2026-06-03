@@ -1,22 +1,22 @@
-import React, { useEffect, useRef } from 'react';
-import maplibregl from 'maplibre-gl';
-import 'maplibre-gl/dist/maplibre-gl.css';
+import React from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 
 const Mapa = () => {
-  const mapContainer = useRef(null);
+  // Coordenadas centrais de Mossoró, RN
+  const position = [-5.1889, -37.3483]; 
 
-  useEffect(() => {
-    const map = new maplibregl.Map({
-      container: mapContainer.current,
-      style: 'https://tiles.stadiamaps.com/styles/alidade_smooth_dark.json',
-      center: [-37.3475, -5.1883], // Centro de Mossoró
-      zoom: 13
-    });
-
-    return () => map.remove();
-  }, []);
-
-  return <div ref={mapContainer} style={{ width: '100%', height: '400px', borderRadius: '20px' }} />;
+  return (
+    <div className="h-64 w-full rounded-xl overflow-hidden border border-neonPurple mb-6">
+      <MapContainer center={position} zoom={13} style={{ height: '100%', width: '100%' }}>
+        <TileLayer
+          // Use o estilo 'alidade_smooth_dark' para combinar com o seu tema Neon
+          url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png?api_key=f3c38717-89ec-422c-80b3-33260dc3330b"
+          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
+        />
+      </MapContainer>
+    </div>
+  );
 };
 
 export default Mapa;
