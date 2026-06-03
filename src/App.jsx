@@ -24,17 +24,22 @@ function App() {
   return (
     <div className="min-h-screen bg-black text-neonCyan p-6 flex flex-col items-center">
       <h1 className="text-2xl font-black uppercase text-neonPurple mb-6">Mossoró Express</h1>
-      {tipoUsuario === 'loja' ? (
-        <div className="w-full max-w-sm flex flex-col gap-6">
+      
+      {/* VISÃO DA LOJA: Apenas Formulário */}
+      {tipoUsuario === 'loja' && (
+        <div className="w-full max-w-sm">
           <FormularioPedido />
-          <ListaPedidos pedidos={pedidos} />
         </div>
-      ) : (
+      )}
+
+      {/* VISÃO DO ENTREGADOR: Apenas Lista e Mapa */}
+      {tipoUsuario === 'entregador' && (
         <div className="w-full max-w-sm">
           <Mapa />
           <ListaPedidos pedidos={pedidos} />
         </div>
       )}
+
       <button onClick={() => setTipoUsuario(null)} className="mt-10 text-gray-500 underline text-sm">Sair</button>
     </div>
   );
